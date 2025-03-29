@@ -5,8 +5,10 @@ package org.mrstm.springboot.TodoApi;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import retrofit2.http.Path;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -23,8 +25,8 @@ public class TodoController2 {
 
     public TodoController2(){
         todoList = new ArrayList<>();
-        todoList.add(new Todo(1 , false , "New Todo created" , 100));
-        todoList.add(new Todo(2 , true , "New True Todo created" , 101));
+        todoList.add(new Todo(1L, false , "New Todo created" , 100));
+        todoList.add(new Todo(2L, true , "New True Todo created" , 101));
     }
 
 //    @GetMapping("/todos")
@@ -80,5 +82,33 @@ public class TodoController2 {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
+    @GetMapping("/error")
+    public String getError(){
+        return "error";
+    }
+
+    @DeleteMapping("/todos/{todoId}/delete")
+    public ResponseEntity<String> deleteTodo(@PathVariable Long todoId) {
+        Iterator<Todo> iterator = todoList.iterator();
+        while (iterator.hasNext()) {
+            Todo todo = iterator.next();
+            if (todo.getId().equals(todoId)) {
+                iterator.remove();
+                return ResponseEntity.ok("Todo deleted successfully");
+            }
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Todo not found");
+    }
+
+    @PatchMapping("/todos/{todoId}/patch")
+    public ResponseEntity<String> patchItem(@RequestBody String newTitle , @PathVariable Long todoId){
+        for(Todo todo : todoList){
+            if(todo.getId() == todoId){
+                todo.setTitle(newTitle);
+                return ResponseEntity.ok().body("patched");
+            }
+        }
+        return ResponseEntity.status(HttpStatus.NOT_MODIFIED).build();
+    }
 
 }

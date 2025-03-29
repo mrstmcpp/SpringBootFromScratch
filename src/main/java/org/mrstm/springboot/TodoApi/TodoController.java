@@ -24,8 +24,8 @@ public class TodoController {
 
     public TodoController(){
         todoList = new ArrayList<>();
-        todoList.add(new Todo(1 , false , "New Todo created" , 100));
-        todoList.add(new Todo(2 , true , "New True Todo created" , 101));
+        todoList.add(new Todo(1L, false , "New Todo created" , 100));
+        todoList.add(new Todo(2L, true , "New True Todo created" , 101));
     }
 
 //    @GetMapping("/todos")

@@ -1,22 +1,22 @@
 package org.mrstm.springboot.TodoApi;
 
 public class Todo{
-	private int id;
+	private Long id;
 	private boolean completed;
 	private String title;
 	private int userId;
 
-	public Todo(int id , boolean completed , String title , int userId ){
+	public Todo(Long id , boolean completed , String title , int userId ){
 		this.id = id;
 		this.completed = completed;
 		this.title = title;
 		this.userId = userId;
 	}
-	public void setId(int id){
+	public void setId(Long id){
 		this.id = id;
 	}
 
-	public int getId(){
+	public Long getId(){
 		return id;
 	}
 

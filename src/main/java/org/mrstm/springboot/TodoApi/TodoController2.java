@@ -17,12 +17,11 @@ import java.util.List;
 // handles serialization nd deserialization by itself...
 //@RequestMapping("/api/v1/todos") => this is used if any request comes from this api below controller will be used...
 //it is used in case my multiple apis... nd for migration
-
-//check controller2
-public class TodoController {
+@RequestMapping("/api/v1/")
+public class TodoController2 {
     private static List<Todo> todoList;
 
-    public TodoController(){
+    public TodoController2(){
         todoList = new ArrayList<>();
         todoList.add(new Todo(1 , false , "New Todo created" , 100));
         todoList.add(new Todo(2 , true , "New True Todo created" , 101));
@@ -68,7 +67,7 @@ public class TodoController {
 
 
     // getting specific data
-    @GetMapping("todos/{todoId}")
+    @GetMapping("/todos/{todoId}")
     public ResponseEntity<Todo> getTodoById(@PathVariable Long todoId){
 
         for(Todo todo : todoList){

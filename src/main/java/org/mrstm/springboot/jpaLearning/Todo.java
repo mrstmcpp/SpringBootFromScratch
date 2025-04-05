@@ -21,6 +21,10 @@ public class Todo {
         this.name = name;
     }
 
+    public Todo() {
+
+    }
+
 
     //instead of using gettters n setters manually ... we can use LOMBOK to do it for us...
 //    public void setId(Long id) {
